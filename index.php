@@ -1,68 +1,6 @@
 <?php
 
-$pas_after = array('キュアブラック',
-'キュアホワイト',
-'シャイニールミナス',
-'キュアブルーム',
-'キュアイーグレット',
-'キュアドリーム',
-'キュアルージュ',
-'キュアレモネード',
-'キュアミント',
-'キュアアクア',
-'ミルキィローズ',
-'キュアピーチ',
-'キュアベリー',
-'キュアパイン',
-'キュアパッション',
-'キュアブロッサム',
-'キュアマリン',
-'キュアサンシャイン',
-'キュアムーンライト',
-'キュアメロディ',
-'キュアリズム',
-'キュアビート',
-'キュアミューズ',
-'キュアハッピー',
-'キュアサニー',
-'キュアピース',
-'キュアマーチ',
-'キュアビューティ',
-//'キュアエコー',
-'キュアハート',
-'キュアダイヤモンド',
-'キュアロゼッタ',
-'キュアソード',
-'キュアエース',
-'キュアラブリー',
-'キュアプリンセス',
-'キュアハニー',
-'キュアフォーチュン',
-'キュアフローラ',
-'キュアマーメイド',
-'キュアトゥインクル',
-'キュアスカーレット',
-'キュアミラクル',
-'キュアマジカル',
-'キュアフェリーチェ',
-//'キュアモフルン',
-'キュアホイップ',
-'キュアカスタード',
-'キュアジェラート',
-'キュアマカロン',
-'キュアショコラ',
-'キュアパルフェ',
-'キュアエール',
-'キュアアンジュ',
-'キュアエトワール',
-'キュアマシェリ',
-'キュアアムール',
-'キュアスター',
-'キュアミルキー',
-'キュアソレイユ',
-'キュアセレーネ');
-
-$pas_before = array('キュアブラック' => '美墨なぎさ',
+$pas = array('キュアブラック' => '美墨なぎさ',
 'キュアホワイト' => '雪城ほのか',
 'シャイニールミナス' => '九条ひかり',
 'キュアブルーム' => '日向咲',
@@ -149,23 +87,23 @@ $start = $_POST['start'];
 	        <div class="col-md-offset-3 col-md-6"><img src="logo.png" class="img-responsive"></div>
 		</div>
 		<br /><br /><br />
-        <h2>歴代プリキュア<? echo sizeof($pas_after); ?>人の変身後と変身前の名前、何人いえるかな？<br />
+        <h2>歴代プリキュア<? echo sizeof($pas); ?>人の変身後と変身前の名前、何人いえるかな？<br />
         (入力は順不同です。変身後と変身前の両方が一致した場合のみ正解とします。)</h2>
   		<br /><br /><br />
         <div class="row">
 <?php
 
-if($start != "")
+if($start != '')
 {
 	
 	$time = time() - $start;
 	
 	$point = 0;
 	
-	for($j = 0; $j < sizeof($pas_after) ; $j++)
+	for($j = 0; $j < sizeof($pas) ; $j++)
 	{
-		$before_list[$j] = str_replace("・", "", $before_list[$j]);
-		$before_list[$j] = str_replace("･", "", $before_list[$j]);
+		$before_list[$j] = str_replace('・', '', $before_list[$j]);
+		$before_list[$j] = str_replace('･', '', $before_list[$j]);
 		if($after_list[$j] == 'キュアブライト') $after_list[$j] = 'キュアブルーム';
 		if($after_list[$j] == 'キュアウィンディ') $after_list[$j] = 'キュアイーグレット';
 		if($before_list[$j] == 'ミルク') $before_list[$j] = '美々野くるみ';
@@ -175,13 +113,14 @@ if($start != "")
 		if($before_list[$j] == 'はーちゃん') $before_list[$j] = '花海ことは';
 		if($before_list[$j] == 'キラリン') $before_list[$j] = 'キラ星シエル';
 	}
-
-
+    
+    
+ 
     $after_check = [];
     
-	for($i = 0; $i < sizeof($pas_after); $i++)
+	for($i = 0; $i < sizeof($pas); $i++)
 	{
-		for($j = 0; $j < sizeof($pas_after); $j++)
+		for($j = 0; $j < sizeof($pas); $j++)
 		{
 			if($pas_after[$i] == $after_list[$j])
             {
@@ -197,13 +136,13 @@ if($start != "")
 		}
 	}
     
-    for($i = 0; $i < sizeof($pas_after); $i++)
+    for($i = 0; $i < sizeof($pas); $i++)
         if($after_check[$i] == 0 && $after_list[$i] != '')
             echo '<p>変身後の' . ($i+1) .'番目が匂うモフ。</p>';
     
 	
-echo '            <h1>' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas_after)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)</h1>
-			<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas_after)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
+echo '            <h1>' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)</h1>
+			<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
 	';
 }
 	
@@ -214,7 +153,7 @@ echo '    	<form method="post" action="/" class="form-horizontal" id="pas_form">
             <div class="form-horizontal">';
 
 
-for($i = 1; $i <= sizeof($pas_after); $i++)
+for($i = 1; $i <= sizeof($pas); $i++)
 echo '
             <div class="form-group" id="name">
                 <label class="control-label col-md-2">' . $i . '. 変身後</label>
