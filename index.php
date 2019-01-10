@@ -1,5 +1,6 @@
 <?php
 
+//プリキュアオールスターズ連想配列
 $pas = array('キュアブラック' => '美墨なぎさ',
 'キュアホワイト' => '雪城ほのか',
 'シャイニールミナス' => '九条ひかり',
@@ -62,9 +63,13 @@ $pas = array('キュアブラック' => '美墨なぎさ',
 'キュアソレイユ' => '天宮えれな',
 'キュアセレーネ' => '香久矢まどか');
 
+//変身後入力配列
 $after_list = $_POST['after'];
+
+//変身前入力配列
 $before_list = $_POST['before'];
 
+//開始時刻
 $start = $_POST['start'];
 
 ?>
@@ -87,74 +92,95 @@ $start = $_POST['start'];
 	        <div class="col-md-offset-3 col-md-6"><img src="logo.png" class="img-responsive"></div>
 		</div>
 		<br /><br /><br />
-        <h2>歴代プリキュア<? echo sizeof($pas); ?>人の変身後と変身前の名前、何人いえるかな？<br />
+        <h2>歴代プリキュア<? echo sizeof($pas); ?>人(エコモフ抜き)の変身後と変身前の名前、何人いえるかな？<br />
         (入力は順不同です。変身後と変身前の両方が一致した場合のみ正解とします。)</h2>
   		<br /><br /><br />
         <div class="row">
 <?php
 
+//POSTで値が渡った場合
 if($start != '')
 {
-	
+	//経過時間
 	$time = time() - $start;
 	
+    //ポイント初期化
 	$point = 0;
 	
-	for($j = 0; $j < sizeof($pas) ; $j++)
+    //表記揺れ吸収(普通に書けや！)
+	for($i = 0; $i < sizeof($pas) ; $i++)
 	{
-		$before_list[$j] = str_replace('・', '', $before_list[$j]);
-		$before_list[$j] = str_replace('･', '', $before_list[$j]);
-		if($after_list[$j] == 'キュアブライト') $after_list[$j] = 'キュアブルーム';
-		if($after_list[$j] == 'キュアウィンディ') $after_list[$j] = 'キュアイーグレット';
-		if($before_list[$j] == 'ミルク') $before_list[$j] = '美々野くるみ';
-		if($before_list[$j] == 'ヒメルダウインドウキュアクイーンオブザブルースカイ') $before_list[$j] = '白雪ひめ';
-		if($before_list[$j] == 'プリンセスホープディライトトワ') $before_list[$j] = '紅城トワ';
-		if($before_list[$j] == 'リコ') $before_list[$j] = '十六夜リコ';
-		if($before_list[$j] == 'はーちゃん') $before_list[$j] = '花海ことは';
-		if($before_list[$j] == 'キラリン') $before_list[$j] = 'キラ星シエル';
+		$before_list[$i] = str_replace('・', '', $before_list[$i]);
+		$before_list[$i] = str_replace('･', '', $before_list[$i]);
+		if($before_list[$i] == 'ミルク') $before_list[$i] = '美々野くるみ';
+        if($before_list[$i] == 'イース') $before_list[$i] = '東せつな';
+		if($before_list[$i] == 'ヒメルダウインドウキュアクイーンオブザブルースカイ') $before_list[$i] = '白雪ひめ';
+		if($before_list[$i] == 'プリンセスホープディライトトワ') $before_list[$i] = '紅城トワ';
+		if($before_list[$i] == 'リコ') $before_list[$i] = '十六夜リコ';
+		if($before_list[$i] == 'はーちゃん') $before_list[$i] = '花海ことは';
+		if($before_list[$i] == 'キラリン') $before_list[$i] = 'キラ星シエル';
+        if($before_list[$i] == 'RUR-9500') $before_list[$i] = 'ルールーアムール';
 	}
     
-    
- 
+    //変身後チェック配列
     $after_check = [];
     
-	for($i = 0; $i < sizeof($pas); $i++)
-	{
-		for($j = 0; $j < sizeof($pas); $j++)
-		{
-			if($pas_after[$i] == $after_list[$j])
+    //変身前チェック配列
+    $before_check = [];
+    
+    //プリキュアオールスターズ大ループ
+    foreach($pas as $key => $value)
+    {
+        //一人ずつ変身後入力配列ループを回す
+        for($i = 0; $i < sizeof($pas); $i++)
+        {
+            //変身後入力配列のどれかと一致したら処理
+            if($after_list[$i] == $key)
             {
-                $after_check[$j] = 1;
-				if($pas_before[$pas_after[$i]] == $before_list[$j])
+                //変身後チェックフラグを立てる
+                $after_check[$i] = 1;
+                
+                //変身前入力配列と一致したら処理
+				if($value == $before_list[$i])
 				{
-					$point += 1;
+                    //変身前チェックフラグを立てる
+                    $before_check[$i] = 1;
+                    
+                    //ポイント加算
+                    $point += 1;
+                    
+                    //変身後入力排列ループを抜けて次の子へ
 					break;
 				}
-                else
-                    echo '<p>変身前の' . ($j+1) .'番目があやしいわね…。</p>';
             }
-		}
-	}
+        }
+    }
     
+    //変身後チェック
     for($i = 0; $i < sizeof($pas); $i++)
         if($after_check[$i] == 0 && $after_list[$i] != '')
             echo '<p>変身後の' . ($i+1) .'番目が匂うモフ。</p>';
     
+    //変身前チェック
+    for($i = 0; $i < sizeof($pas); $i++)
+        if($before_check[$i] == 0 && $before_list[$i] != '')
+            echo '<p>変身前の' . ($i+1) .'番目があやしいわね…。</p>';
 	
-echo '            <h1>' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)</h1>
+    //結果表示
+    echo '            <h1>' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)</h1>
 			<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
 	';
 }
-	
+//POSTで値が渡っていない場合(初期状態)
 else
 {
-echo '    	<form method="post" action="/" class="form-horizontal" id="pas_form">
+    //人数分のフォームを生成
+    echo '    	<form method="post" action="/" class="form-horizontal" id="pas_form">
 			<input name="start" type="hidden" value="' . time() .'" />
             <div class="form-horizontal">';
 
-
-for($i = 1; $i <= sizeof($pas); $i++)
-echo '
+    for($i = 1; $i <= sizeof($pas); $i++)
+        echo '
             <div class="form-group" id="name">
                 <label class="control-label col-md-2">' . $i . '. 変身後</label>
                 <div class="col-md-4"><input name="after[]" type="text" class="form-control" maxlength="60"/></div>
@@ -162,7 +188,7 @@ echo '
                 <div class="col-md-4"><input name="before[]" type="text" class="form-control" maxlength="60"/></div>
             </div>';
 
-echo '		
+    echo '		
            	</div>
 			<br /><br /><br />
             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="submit();">確認</button>
