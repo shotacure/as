@@ -108,19 +108,19 @@ if($start != '')
 	$point = 0;
 	
     //表記揺れ吸収(普通に書けや！)
-	for($i = 0; $i < sizeof($pas) ; $i++)
-	{
-		$before_list[$i] = str_replace('・', '', $before_list[$i]);
-		$before_list[$i] = str_replace('･', '', $before_list[$i]);
-		if($before_list[$i] == 'ミルク') $before_list[$i] = '美々野くるみ';
+    for($i = 0; $i < sizeof($pas) ; $i++)
+    {
+        $before_list[$i] = str_replace('・', '', $before_list[$i]);
+        $before_list[$i] = str_replace('･', '', $before_list[$i]);
+        if($before_list[$i] == 'ミルク') $before_list[$i] = '美々野くるみ';
         if($before_list[$i] == 'イース') $before_list[$i] = '東せつな';
-		if($before_list[$i] == 'ヒメルダウインドウキュアクイーンオブザブルースカイ') $before_list[$i] = '白雪ひめ';
-		if($before_list[$i] == 'プリンセスホープディライトトワ') $before_list[$i] = '紅城トワ';
-		if($before_list[$i] == 'リコ') $before_list[$i] = '十六夜リコ';
-		if($before_list[$i] == 'はーちゃん') $before_list[$i] = '花海ことは';
-		if($before_list[$i] == 'キラリン') $before_list[$i] = 'キラ星シエル';
+        if($before_list[$i] == 'ヒメルダウインドウキュアクイーンオブザブルースカイ') $before_list[$i] = '白雪ひめ';
+        if($before_list[$i] == 'プリンセスホープディライトトワ') $before_list[$i] = '紅城トワ';
+        if($before_list[$i] == 'リコ') $before_list[$i] = '十六夜リコ';
+        if($before_list[$i] == 'はーちゃん') $before_list[$i] = '花海ことは';
+        if($before_list[$i] == 'キラリン') $before_list[$i] = 'キラ星シエル';
         if($before_list[$i] == 'RUR-9500') $before_list[$i] = 'ルールーアムール';
-	}
+    }
     
     //変身後チェック配列
     $after_check = [];
