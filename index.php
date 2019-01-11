@@ -179,12 +179,12 @@ else
 			<input name="start" type="hidden" value="' . time() .'" />
             <div class="form-horizontal">';
 
-    for($i = 1; $i <= sizeof($pas); $i++)
+    for($i = 0; $i < sizeof($pas); $i++)
         echo '
             <div class="form-group" id="name">
-                <label class="control-label col-md-2">' . $i . '. 変身後</label>
+                <label class="control-label col-md-2">' . ($i+1) . '. 変身後</label>
                 <div class="col-md-4"><input name="after[]" type="text" class="form-control" maxlength="60"/></div>
-                <label class="control-label col-md-2">' . $i . '. 変身前</label>
+                <label class="control-label col-md-2">' . ($i+1) . '. 変身前</label>
                 <div class="col-md-4"><input name="before[]" type="text" class="form-control" maxlength="60"/></div>
             </div>';
 
