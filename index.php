@@ -139,19 +139,19 @@ if($start != '')
             {
                 //変身後チェックフラグを立てる
                 $after_check[$i] = 1;
-                
+
                 //変身前入力配列と一致したら処理
-				if($value == $before_list[$i])
-				{
+                if($value == $before_list[$i])
+                {
                     //変身前チェックフラグを立てる
                     $before_check[$i] = 1;
-                    
+
                     //ポイント加算
                     $point += 1;
-                    
+
                     //変身後入力排列ループを抜けて次の子へ
-					break;
-				}
+                    break;
+                }
             }
         }
     }
@@ -167,8 +167,8 @@ if($start != '')
             echo '<p>変身前の' . ($i+1) .'番目があやしいわね…。</p>';
 	
     //結果表示
-    echo '            <h1>' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)</h1>
-			<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
+    echo '            <h1>' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒:1人あたり' . round(($time / $point), 1, PHP_ROUND_HALF_DOWN) . '秒)</h1>
+			<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、' . $point .'人言えました！(' . ceil($point * 100 / sizeof($pas)) .'/100点:所要時間' . floor($time / 60) . '分' . $time % 60 . '秒:1人あたり' . round(($time / $point), 1, PHP_ROUND_HALF_DOWN) . '秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
 	';
 }
 //POSTで値が渡っていない場合(初期状態)
