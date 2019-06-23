@@ -61,7 +61,8 @@ $pas = array('キュアブラック' => '美墨なぎさ',
 'キュアスター' => '星奈ひかる',
 'キュアミルキー' => '羽衣ララ',
 'キュアソレイユ' => '天宮えれな',
-'キュアセレーネ' => '香久矢まどか');
+'キュアセレーネ' => '香久矢まどか',
+'キュアコスモ' => 'ユニ');
 
 //変身後入力配列
 $after_list = $_POST['after'];
@@ -120,6 +121,11 @@ if($start != '')
         if($before_list[$i] == 'はーちゃん') $before_list[$i] = '花海ことは';
         if($before_list[$i] == 'キラリン') $before_list[$i] = 'キラ星シエル';
         if($before_list[$i] == 'RUR-9500') $before_list[$i] = 'ルールーアムール';
+        if($before_list[$i] == 'マオ') $before_list[$i] = 'ユニ';
+        if($before_list[$i] == 'マオたん') $before_list[$i] = 'ユニ';
+        if($before_list[$i] == 'ブルーキャット') $before_list[$i] = 'ユニ';
+        if($before_list[$i] == '宇宙怪盗ブルーキャット') $before_list[$i] = 'ユニ';
+        if($before_list[$i] == 'バケニャーン') $before_list[$i] = 'ユニ';
     }
     
     //変身後チェック配列
