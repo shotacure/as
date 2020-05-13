@@ -182,7 +182,7 @@ if($start != '')
     //結果表示
     ?>
     <h1><?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof($pas)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?=  $time % 60 ?>秒:1人あたり<?=  round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)</h1>
-	<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、<?=  $point ?>人言えました！(<?= ceil($point * 100 / sizeof($pas)) ?>'/100点:所要時間<?= floor($time / 60) ?>分<?= $time % 60 ?>秒:1人あたり<?= round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
+	<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、<?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof($pas)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?= $time % 60 ?>秒:1人あたり<?= round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
 	';
     <?
 }
