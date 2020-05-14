@@ -105,8 +105,8 @@ $start = $_POST['start'];
 <?php
 
 //POSTで値が渡った場合
-if($start != '')
-{
+if($start != '') :
+
 	//経過時間
 	$time = time() - $start;
 	
@@ -163,39 +163,35 @@ if($start != '')
     }
     
     //変身後チェック
-    for ($i = 0; $i < sizeof($pas); $i++) {
-        if ($after_check[$i] == 0 && $after_list[$i] != '') {
-            ?>
+    for ($i = 0; $i < sizeof($pas); $i++) :
+        if ($after_check[$i] == 0 && $after_list[$i] != '') : ?>
             <p>変身後の<?= ($i+1) ?>番目が匂うモフ。</p>
             <?php
-        }
-    }
+        endif;
+    endfor;
     
     //変身前チェック
-    for ($i = 0; $i < sizeof($pas); $i++) {
-        if ($before_check[$i] == 0 && $before_list[$i] != '') {
-            ?>
+    for ($i = 0; $i < sizeof($pas); $i++) :
+        if ($before_check[$i] == 0 && $before_list[$i] != '') : ?>
             <p>変身前の<?= ($i+1) ?>番目があやしいわね…。</p>
             <?php
-        }
-    }
+        endif;
+    endfor;
     //結果表示
     ?>
     <h1><?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof($pas)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?=  $time % 60 ?>秒:1人あたり<?=  round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)</h1>
 	<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、<?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof($pas)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?= $time % 60 ?>秒:1人あたり<?= round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
 	';
     <?
-}
 //POSTで値が渡っていない場合(初期状態)
-else {
+else :
     //人数分のフォームを生成
     ?>
     <form method="post" action="/" class="form-horizontal" id="pas_form">
         <input name="start" type="hidden" value="<?= time() ?>" />
         <div class="form-horizontal">
             <?php
-    for ($i = 0; $i < sizeof($pas); $i++) {
-            ?>
+    for ($i = 0; $i < sizeof($pas); $i++) : ?>
             <div class="form-group" id="name">
                 <label class="control-label col-md-2"><?= ($i+1) ?>. 変身後</label>
                 <div class="col-md-4"><input name="after[]" type="text" class="form-control" maxlength="60"/></div>
@@ -203,16 +199,14 @@ else {
                 <div class="col-md-4"><input name="before[]" type="text" class="form-control" maxlength="60"/></div>
             </div>
             <?php
-    }
-            ?>
+    endfor; ?>
            	</div>
 			<br><br><br>
             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="submit();">確認</button>
 			<br><br><br>
         </form>
         <?php
-}
-		?>
+endif; ?>
         </div>
         </div>
     </body>
