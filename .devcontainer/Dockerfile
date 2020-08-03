@@ -3,10 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM php:7-cli
-
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
+FROM php:7.4-cli
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
@@ -18,7 +15,11 @@ ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
+    #
+    # [Optional] Install MariaDB client to manage database directly from dev container's shell
+    && apt-get install -y mariadb-client \
     #
     # install git iproute2, procps, lsb-release (useful for CLI installs)
     && apt-get -y install git openssh-client less iproute2 procps iproute2 lsb-release \
@@ -37,12 +38,15 @@ RUN apt-get update \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     #
+    # [Optional] Install NPM to assist with frontend development (Dramatically increases build time on slower connections)
+    && apt-get install -y npm \
+    #
+    && apt-get install -y wget libjpeg-dev libfreetype6-dev \
+    && apt-get install -y zlib1g-dev libpng-dev libpng-dev libmagick++-dev \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog
-
-
+    && rm -rf /var/lib/apt/lists/* \
+    #
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install mysqli pdo_mysql gd opcache
