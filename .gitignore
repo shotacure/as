@@ -4,3 +4,7 @@
 _notes/
 /bower_components/
 /node_modules/
+.vscode/
+/.sql/
+/html/common/conn.php
+.htaccess
