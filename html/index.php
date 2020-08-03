@@ -32,24 +32,24 @@ if (isset($_POST['after'])) {
         <div class="container">
         <br><br><br>
         <div class="row">
-	        <div class="col-md-offset-2 col-md-8"><h1 class="site_title">プリキュアオールスターズ<br>いえるかな</h1></div>
-		</div>
-		<br><br><br>
+            <div class="col-md-offset-2 col-md-8"><h1 class="site_title">プリキュアオールスターズ<br>いえるかな</h1></div>
+        </div>
+        <br><br><br>
         <h2>歴代プリキュア<?= sizeof(PRECURE) ?>人(エコモフ抜き)の変身後と変身前の名前、何人いえるかな？<br>
         (入力は順不同です。変身後と変身前の両方が一致した場合のみ正解とします。)</h2>
-  		<br><br><br>
+          <br><br><br>
         <div class="row">
 <?php
 
 // POSTで値が渡った場合
 if($start != '') :
 
-	//経過時間
-	$time = time() - $start;
-	
+    //経過時間
+    $time = time() - $start;
+    
     //ポイント初期化
-	$point = 0;
-	
+    $point = 0;
+    
     //表記揺れ吸収(普通に書けや！)
     for ($i = 0; $i < sizeof(PRECURE) ; $i++) {
         $before_list[$i] = str_replace('・', '', $before_list[$i]);
@@ -117,8 +117,8 @@ if($start != '') :
     //結果表示
     ?>
     <h1><?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof(PRECURE)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?=  $time % 60 ?>秒:1人あたり<?=  round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)</h1>
-	<a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、<?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof(PRECURE)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?= $time % 60 ?>秒:1人あたり<?= round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
-	';
+    <a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、<?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof(PRECURE)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?= $time % 60 ?>秒:1人あたり<?= round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
+    ';
     <?
 //POSTで値が渡っていない場合(初期状態)
 else :
@@ -135,10 +135,10 @@ else :
                 <div class="col-md-4"><input name="before[]" type="text" class="form-control" maxlength="60"/></div>
             </div>
 <?php endfor; ?>
-           	</div>
-			<br><br><br>
+               </div>
+            <br><br><br>
             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="submit();">確認</button>
-			<br><br><br>
+            <br><br><br>
         </form>
         <?php
 endif; ?>
