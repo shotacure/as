@@ -44,13 +44,13 @@ if (isset($_POST['after'])) {
 // POSTで値が渡った場合
 if($start != '') :
 
-    //経過時間
+    // 経過時間
     $time = time() - $start;
     
-    //ポイント初期化
+    // ポイント初期化
     $point = 0;
     
-    //表記揺れ吸収(普通に書けや！)
+    // 表記揺れ吸収(普通に書けや！)
     for ($i = 0; $i < sizeof(PRECURE) ; $i++) {
         $before_list[$i] = str_replace('・', '', $before_list[$i]);
         $before_list[$i] = str_replace('･', '', $before_list[$i]);
@@ -69,37 +69,37 @@ if($start != '') :
         if($before_list[$i] == 'バケニャーン') $before_list[$i] = 'ユニ';
     }
     
-    //変身後チェック配列
+    // 変身後チェック配列
     $after_check = [];
     
-    //変身前チェック配列
+    // 変身前チェック配列
     $before_check = [];
     
-    //プリキュアオールスターズ大ループ
+    // プリキュアオールスターズ大ループ
     foreach (PRECURE as $key => $value) {
-        //一人ずつ変身後入力配列ループを回す
+        // 一人ずつ変身後入力配列ループを回す
         for ($i = 0; $i < sizeof(PRECURE); $i++) {
-            //変身後入力配列のどれかと一致したら処理
+            // 変身後入力配列のどれかと一致したら処理
             if ($after_list[$i] == $key) {
-                //変身後チェックフラグを立てる
+                // 変身後チェックフラグを立てる
                 $after_check[$i] = 1;
 
-                //変身前入力配列と一致したら処理
+                // 変身前入力配列と一致したら処理
                 if($value == $before_list[$i]) {
-                    //変身前チェックフラグを立てる
+                    // 変身前チェックフラグを立てる
                     $before_check[$i] = 1;
 
-                    //ポイント加算
+                    // ポイント加算
                     $point += 1;
 
-                    //変身後入力排列ループを抜けて次の子へ
+                    // 変身後入力排列ループを抜けて次の子へ
                     break;
                 }
             }
         }
     }
     
-    //変身後チェック
+    // 変身後チェック
     for ($i = 0; $i < sizeof(PRECURE); $i++) :
         if ($after_check[$i] == 0 && $after_list[$i] != '') : ?>
             <p>変身後の<?= ($i+1) ?>番目が匂うモフ。</p>
@@ -107,22 +107,21 @@ if($start != '') :
         endif;
     endfor;
     
-    //変身前チェック
+    // 変身前チェック
     for ($i = 0; $i < sizeof(PRECURE); $i++) :
         if ($before_check[$i] == 0 && $before_list[$i] != '') : ?>
             <p>変身前の<?= ($i+1) ?>番目があやしいわね…。</p>
             <?php
         endif;
     endfor;
-    //結果表示
+    // 結果表示
     ?>
     <h1><?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof(PRECURE)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?=  $time % 60 ?>秒:1人あたり<?=  round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)</h1>
     <a href="http://twitter.com/share?url=http://as.precure.tv/&text=プリキュア、<?= $point ?>人言えました！(<?= ceil($point * 100 / sizeof(PRECURE)) ?>/100点:所要時間<?= floor($time / 60) ?>分<?= $time % 60 ?>秒:1人あたり<?= round(($time / $point), 1, PHP_ROUND_HALF_DOWN) ?>秒)&hashtags=プリキュアいえるかな" target="_blank">ツイートする</a>
-    ';
     <?
-//POSTで値が渡っていない場合(初期状態)
+// POSTで値が渡っていない場合(初期状態)
 else :
-    //人数分のフォームを生成
+    // 人数分のフォームを生成
     ?>
     <form method="post" action="/" class="form-horizontal" id="pas_form">
         <input name="start" type="hidden" value="<?= time() ?>" />
